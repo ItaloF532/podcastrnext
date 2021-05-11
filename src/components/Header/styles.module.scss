@@ -1,0 +1,30 @@
+//Por padrão dentro do Next é usada uma ferramenta que se chama CSS Modules
+//É basicamente um arquivo que utilizamos a extensão .module.scss ou .module.css, como no
+//style.module.scss
+//Dentro dessa ferramenta conseguimos criar um arquivo css/scss que são específicos de um componente,
+//ou seja, as regras desse css são compartilhas com nenhum outro componente
+
+//Nesse caso a classe é declara no documento como uma variavel java script, como no /components/index.tsx
+
+.headerContainer {
+  background: var(--white);
+  height: 6.5rem;
+
+  display: flex;
+  align-items: center;
+
+  padding: 2rem/*vertical*/ 4rem/*horizontal*/;
+
+  border-bottom: 1px solid var(--gray-100);
+
+  p {
+    margin-left: 2rem;
+    padding: 0.25rem 0 0.25rem 2rem;
+    border-left: 1px solid var(--gray-100);
+  }
+
+  span {
+    margin-left: auto;
+    text-transform: capitalize; 
+  }
+}

@@ -1,0 +1,81 @@
+/*
+Dicas de acessibilidade para a pagina utilizando css\
+  - Por padrão todo HTML tem uma fonte tamanho 16
+
+  - Utilizar sempre o REM para as medidas
+      (Salve alguns casos que faça sentido usar pixels)  
+      O REM utiliza o tamanho da pagina como referencia, ou seja, ele varia de acordo com o tamanho
+      da tela do usuário final/fonte do sistema.
+  - O pixel ele é fixo, sendo assim, ele não sofre alterações quando é alterado o fonte do sistema do usuário
+  - O REM também pode ser utilizado para tamanho de elementos, por exemplo uma caixa (box).
+    Onde no final a aplicação toda sofre alteração de tamanho de acordo com a tela/fonte do usuário.
+
+  -No exemplo abaixo o REM é definido de acordo com o @media
+      É essencial que o font-size dentro desta condição seja definido por percentual %,
+      Caso contrário, o mesmo não ocorre alterações
+      No @media é utilizado 93,75%; Mas o que seria essa porcentagem?
+         Seria 93,75% do tamanho padrão da fonte, ou seja 16*0,9375 = 15px
+         (Assim convertendo o tamanho da fonte padrão para o desejado)
+*/
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #FFF;
+
+  --gray-50: #F7F8FA;
+  --gray-100: #E6E8EB;
+  --gray-200: #AFB2B1;
+  --gray-500: #808080;
+  --gray-800: #494D4B;
+
+  --green-500: #04D361;
+  
+  --purple-300: #9F75FF;
+  --purple-400: #9164FA; 
+  --purple-500: #8257E5;
+  --purple-800: #6F48C9;
+}
+
+@media (max-width: 1080px) {
+  html{
+    font-size: 93.75%; //15px
+  }
+}
+
+@media (max-width: 720px) {
+  html{
+    font-size: 87.5%; //14px
+  }
+}
+
+body {
+  background-color: var(--gray-50);
+}
+
+body, input, textarea, button {
+  font: 500 1rem Inter,  sans-serif;
+  color: var(--gray-500);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  font-family: Lexend, sans-serif;
+  color: var(--gray-800);
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+button {
+  cursor: pointer;
+}
