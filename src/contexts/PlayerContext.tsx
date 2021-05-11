@@ -38,6 +38,8 @@ type PlayerContextData = {
   setPlayingState: (state: boolean) => void;
   isPlaying:boolean;
   playList: (list: Episode[], index: number) => void;
+  playNext: () => void;
+  playPrevious: () => void;
 }
 
 //Tipagem forçada do parâmetro
@@ -74,12 +76,31 @@ export function PlayerContextProvider ({ children }: PlayerContextProviderProps)
     setIsPlaying(state);
   }
 
+  function playNext() {
+    const nextEpisodeIndex = currentEpisodeIndex + 1;
+    if (nextEpisodeIndex >= episodeList.length){
+      return;
+    } else {
+      setCurrentEpisodeIndex(nextEpisodeIndex);
+    }
+  }
+
+  function playPrevious() {
+    if (currentEpisodeIndex>0){
+      setCurrentEpisodeIndex(currentEpisodeIndex - 1);
+    } else {
+      return;
+    }
+  }
+
   return (
     <PlayerContext.Provider 
       value={{ episodeList, 
       currentEpisodeIndex, 
       play, 
       playList,
+      playNext,
+      playPrevious,
       isPlaying,
       togglePlay,
       setPlayingState 

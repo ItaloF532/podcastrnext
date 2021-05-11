@@ -56,19 +56,21 @@ type HomeProps = {
 //A key do  react é como se fosse um chave primaria para identificar os elementos
 //após uma estrutura de repetição. 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const { play } = useContext(PlayerContext)
+  const { playList } = useContext(PlayerContext)
+
+  const episodeList = [...latestEpisodes, ...allEpisodes];
   
   return (
     <div className={styles.homepage}>
       <section className={styles.latestEpisodes}>
         <h2>Últimos lançamentos</h2>
         <ul>
-          {latestEpisodes.map(episode => {
+          {latestEpisodes.map((episode, index) => {
             return (
               <li key={episode.id}>
                 <Image
                   width={192}
-                  height={192}
+                  height={192} 
                   src={episode.thumbnail}
                   alt={episode.title}
                   objectFit='cover'
@@ -82,7 +84,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                   <span>{episode.publishedAt}</span>
                   <span>{episode.durationAsString}</span>
                 </div>
-                <button type="button" onClick={() => play(episode)}>
+                <button type="button" onClick={() => playList(episodeList, index)}>
                   <img src="/play-green.svg" alt="Tocar episódio" />
                 </button>
               </li>
@@ -105,7 +107,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
               </tr>
             </thead>
             <tbody>
-              {allEpisodes.map(episode=>{
+              {allEpisodes.map((episode, index)=>{
                 return(
                   
                   <tr key={episode.id}>
@@ -127,7 +129,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
                     <td style={{ width: 100 }}>{episode.publishedAt}</td>
                     <td>{episode.durationAsString}</td>
                     <td>
-                      <button type="button" onClick={() => play(episode)}>
+                      <button type="button" onClick={() => playList(episodeList, index + latestEpisodes.length)}>
                         <img src="/play-green.svg" alt="Tocar episódio"/>
                       </button>
                     </td>
@@ -157,23 +159,6 @@ export const getStaticProps: GetStaticProps = async () => {
 
   })
 
-  //tentativa de tipagem fracassada
-  // type Episode = {
-  //   id: string;
-  //   title: string;
-  //   members: string;
-  //   thumbnail: string;
-  //   publishedAt: Date;
-  //   durationAsString: string;
-  //   duration: number;
-  //   description: string;
-  //   url: string;
-  // };
-
-  // type Episodes = {
-  //   episodes: Episode[];
-  // };
-
   const episodes = data.map(episode => {
     return {
       id: episode.id,
@@ -199,19 +184,7 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 }
 
-/* Abaixo funções não tipadas
-export async function getStaticProps(){
-  const response = await fetch('http://localhost:3333/episodes')
-  const data = await response.json()
-
-  return{
-    props: {
-      episodes: data,
-    },
-    revalidate: 60 * 60 * 8,
-  }
-}
-
+/* 
 Server Side Rendering (SSR), todo a vez que a pagina for acessada, será devolvida a pag atualizada.
 
  * export async function getStaticProps(){
