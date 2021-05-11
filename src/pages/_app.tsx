@@ -1,7 +1,5 @@
 //O app é basicamente um arquivo global, ele sempre fica por volta de todas as pags do app
 //Sempre que uma pag é chamada o app tbm é chamado
-import { useState } from 'react';
-
 import Header from '../components/Header';
 import Player from '../components/Player';
 import { PlayerContextProvider } from '../contexts/PlayerContext';
