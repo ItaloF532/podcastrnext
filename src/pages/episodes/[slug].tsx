@@ -15,19 +15,18 @@
  * 
   */
 import { GetStaticPaths, GetStaticProps } from "next";
-import { useRouter } from "next/router";
 import Image from 'next/image';
 import Link from "next/link";
 import { api } from "../../services/api";
 
+import { usePlayer } from "../../contexts/PlayerContext";
+import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString';
+
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
-import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString';
-import { PlayerContext } from '../../contexts/PlayerContext';
 
 import styles from "./episode.module.scss";
-import { useContext } from "react";
 
 type Episode = {
   id: string;
@@ -47,8 +46,7 @@ type EpisodeProps = {
 
 
 export default function Episode( {episode}: EpisodeProps ) {
-  const router = useRouter();
-  const { play } = useContext(PlayerContext)
+  const { play } = usePlayer()
 
   /**Por segurança o React nunca converte um texto HTML em um texto normal, pois
    *pode-se inserir dentro desse HTML, por exemplo, um script.

@@ -1,5 +1,4 @@
 import { GetStaticProps } from 'next';
-import { useContext, useState } from 'react';
 import { api } from '../services/api';
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
@@ -26,8 +25,7 @@ import Image from 'next/image';
  import Link from "next/link";
 
 import styles from './home.module.scss';
-import Player from '../components/Player';
-import { PlayerContext } from '../contexts/PlayerContext';
+import { usePlayer } from '../contexts/PlayerContext';
 import { convertDurationToTimeString } from '../utils/convertDurationToTimeString';
 
 
@@ -56,7 +54,7 @@ type HomeProps = {
 //A key do  react é como se fosse um chave primaria para identificar os elementos
 //após uma estrutura de repetição. 
 export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
-  const { playList } = useContext(PlayerContext)
+  const { playList } = usePlayer();
 
   const episodeList = [...latestEpisodes, ...allEpisodes];
   
