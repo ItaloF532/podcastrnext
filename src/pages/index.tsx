@@ -22,7 +22,7 @@ import Image from 'next/image';
  * aconteça de tudo ser carregado novamente.
  * Esse link fica recebe a ancora de acesso para novas páginas.
  */
- import Link from "next/link";
+import Link from "next/link";
 
 import styles from './home.module.scss';
 import { usePlayer } from '../contexts/PlayerContext';
