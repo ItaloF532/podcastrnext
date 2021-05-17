@@ -16,7 +16,7 @@
  * E sempre que que um dos componentes alterar a informação, os demais sofreram com está ação.
  */
 
-import { createContext, useState, ReactNode, useContext } from 'react';
+import { createContext, useState, ReactNode, useContext, VoidFunctionComponent } from 'react';
 
 //Tipagem do parametro do creatContext
 type Episode = {
@@ -46,6 +46,7 @@ type PlayerContextData = {
   playList: (list: Episode[], index: number) => void;
   playNext: () => void;
   playPrevious: () => void;
+  clearPlayerState: () => void;
 }
 
 //Tipagem forçada do parâmetro
@@ -92,8 +93,13 @@ export function PlayerContextProvider ({ children }: PlayerContextProviderProps)
     setIsPlaying(state);
   }
 
+  function clearPlayerState() {
+    setEpisodeList([]);
+    setCurrentEpisodeIndex(0);
+  }
+
   const hasPrevious = currentEpisodeIndex>0;
-  const hasNext = (currentEpisodeIndex + 1) < episodeList.length;
+  const hasNext = isShuffling || (currentEpisodeIndex + 1) < episodeList.length;
 
   function playNext() {
     if(isShuffling) {
@@ -129,7 +135,8 @@ export function PlayerContextProvider ({ children }: PlayerContextProviderProps)
       toggleShuffle,
       setPlayingState,
       hasPrevious,
-      hasNext 
+      hasNext,
+      clearPlayerState 
     }}
     >
       {children} 

@@ -1,6 +1,6 @@
 //Aqui estamos utilizando o axios para criar um baseURL (URL base)
 //assim para todas as requisições  (request) que formos fazer
-//para nossa api, poderemos partir direto do parametro desejado
+//para nossa api, poderemos partir direto do parâmetro desejado
 //visto que o axios vai utilizar a baseURL que definimos
 import axios from 'axios';
 
