@@ -65,7 +65,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
       <Head>
         <title>Home | Podcastr</title>
       </Head>
-      
+
       <section className={styles.latestEpisodes}>
         <h2>Últimos lançamentos</h2>
         <ul>
@@ -187,18 +187,3 @@ export const getStaticProps: GetStaticProps = async () => {
     revalidate: 60 * 60 * 8, // 8 hours
   }
 }
-
-/* 
-Server Side Rendering (SSR), todo a vez que a pagina for acessada, será devolvida a pag atualizada.
-
- * export async function getStaticProps(){
- * const response = await fetch('http://localhost:3333/episodes')
- * const data = await response.json()
- *
- *  return{
- *    props: {
- *      episodes: data,
- *    }
- *  }
- * }
- *  */
