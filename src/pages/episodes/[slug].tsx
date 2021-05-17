@@ -15,6 +15,7 @@
  * 
   */
 import { GetStaticPaths, GetStaticProps } from "next";
+import Head from "next/head";
 import Image from 'next/image';
 import Link from "next/link";
 import { api } from "../../services/api";
@@ -58,6 +59,10 @@ export default function Episode( {episode}: EpisodeProps ) {
     <div className={styles.episode}>
       
       <div className={styles.thumbnailContainer}>
+        <Head>
+          <title>{episode.title} | Podcastr</title>
+        </Head>
+        
         <Link href="/">
           <button type="button">
             <img src="/arrow-left.svg" alt="Voltar"/>
